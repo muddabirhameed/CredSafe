@@ -10,7 +10,7 @@ import {
   SafeAreaView,
   Platform,
 } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 
 //Got this Dummy Data From DeepSeek (So AI Used here)
@@ -91,26 +91,18 @@ const CardDetailModal = ({ visible, card, onClose, onSave }) => {
             onChangeText={setExpiry}
             maxLength={5}
           />
-          <View style={styles.pickerRow}>
-            <Text style={styles.pickerLabel}>Company:</Text>
-            <Picker
-              selectedValue={company}
-              style={styles.picker}
-              onValueChange={setCompany}
-            >
-              {CARD_COMPANIES.map(c => <Picker.Item key={c} label={c} value={c} />)}
-            </Picker>
-          </View>
-          <View style={styles.pickerRow}>
-            <Text style={styles.pickerLabel}>Type:</Text>
-            <Picker
-              selectedValue={type}
-              style={styles.picker}
-              onValueChange={setType}
-            >
-              {CARD_TYPES.map(t => <Picker.Item key={t} label={t} value={t} />)}
-            </Picker>
-          </View>
+          <TextInput
+            style={styles.input}
+            placeholder="Company"
+            value={company}
+            onChangeText={setCompany}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Type"
+            value={type}
+            onChangeText={setType}
+          />
           <View style={styles.modalActions}>
             <TouchableOpacity style={styles.saveBtn} onPress={handleSave}>
               <Text style={styles.saveBtnText}>Save</Text>
