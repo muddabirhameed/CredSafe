@@ -12,38 +12,20 @@ import {
   ScrollView,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// ------------------------------------------------------------
-// CONSTANTS
 const NOTES_KEY = 'CRED_SAFE_NOTES';
-// ------------------------------------------------------------
-// TYPES
-/**
- * @typedef {Object} Note
- * @property {string} id - Unique identifier for the note.
- * @property {string} title - Title of the note.
- * @property {string} tag - Tag or category for the note.
- * @property {string} description - Detailed description of the note.
- */
-// ------------------------------------------------------------
-// COMPONENT
+
 const NotesScreen = () => {
-  // ------------------------------ STATE ------------------------------
   const [title, setTitle] = useState('');
   const [tag, setTag] = useState('');
   const [description, setDescription] = useState('');
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // ------------------------------ EFFECTS ------------------------------
   useEffect(() => {
     // Load notes on mount
     loadNotes();
   }, []);
 
-  // ------------------------------ FUNCTIONS ------------------------------
-  /**
-   * Loads notes from AsyncStorage.
-   */
   const loadNotes = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem(NOTES_KEY);
@@ -57,10 +39,6 @@ const NotesScreen = () => {
     }
   };
 
-  /**
-   * Persists current notes array to AsyncStorage.
-   * @param {Note[]} notesArray - The notes array to persist.
-   */
   const saveNotes = async (notesArray) => {
     try {
       const jsonValue = JSON.stringify(notesArray);
@@ -70,9 +48,6 @@ const NotesScreen = () => {
     }
   };
 
-  /**
-   * Adds a new note to the list.
-   */
   const addNote = () => {
     if (!title.trim() || !description.trim()) {
       alert('Title and description are required.');
@@ -92,10 +67,6 @@ const NotesScreen = () => {
     setTag('');
     setDescription('');
   };
-
-  /**
-   * Renders a single note item.
-   */
   const renderNoteItem = ({ item }) => (
     <TouchableOpacity style={styles.noteCard}>
       <Text style={styles.noteTitle}>{item.title}</Text>
@@ -104,7 +75,6 @@ const NotesScreen = () => {
     </TouchableOpacity>
   );
 
-  // ------------------------------ RENDER ------------------------------
   if (loading) {
     return (
       <View style={styles.centered}>
@@ -160,8 +130,6 @@ const NotesScreen = () => {
   );
 };
 
-// ------------------------------------------------------------
-// STYLES
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -225,7 +193,4 @@ const styles = StyleSheet.create({
     paddingBottom: 100,
   },
 });
-// ------------------------------------------------------------
-// EXPORT
 export default NotesScreen;
-// ------------------------------------------------------------

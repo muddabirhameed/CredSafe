@@ -1,4 +1,3 @@
-// File: constants/colors.js
 
 const Colors = {
   background: '#0A0E21',

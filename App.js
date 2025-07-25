@@ -7,7 +7,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SplashScreen from './Components/SplashScreen';
 import SetupAccount from './Components/SetupAccount';
 import LoginScreen from './Components/LoginScreen';
-import HomeScreen from './Components/HomeScreen'; // create a simple one for now
+import HomeScreen from './Components/HomeScreen';
 import OnlineAccountDetailScreen from './Components/OnlineAccountDetailScreen';
 import PasswordDetailScreen from './Components/PasswordDetailScreen';
 import CryptoSeedDetailScreen from './Components/CryptoSeedDetailScreen';

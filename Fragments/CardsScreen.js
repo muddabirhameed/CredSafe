@@ -13,17 +13,16 @@ import {
 import { Picker } from '@react-native-picker/picker';
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 
+//Got this Dummy Data From DeepSeek (So AI Used here)
 const CARD_COMPANIES = ['Visa', 'MasterCard', 'American Express', 'Discover', 'Rupay'];
 const CARD_TYPES = ['Credit', 'Debit', 'Prepaid', 'Other'];
-
-// No initial cards
 
 const CARD_ICONS = {
   Visa: 'cc-visa',
   'MasterCard': 'cc-mastercard',
   'American Express': 'cc-amex',
   Discover: 'cc-discover',
-  Rupay: 'credit-card', // No direct icon, fallback
+  Rupay: 'credit-card', 
 };
 
 const Card = ({ card, onPress }) => (

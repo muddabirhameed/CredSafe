@@ -1,15 +1,4 @@
-/**
- * VaultScreen.js
- *
- * Main screen for managing user's vault entries (online accounts, passwords, crypto seeds).
- * Features:
- *   - Add, view, and delete vault entries
- *   - Modular, extensible, and highly commented for maintainability
- *   - Navigation to detail screens for each entry type
- *   - Placeholder hooks for search, filtering, and future features
- *
- * @author CredSafe Team
- */
+//In this Fragment i took help from AI in some parts.
 
 import React, { useState, useEffect, useCallback } from 'react';
 import {
@@ -30,23 +19,11 @@ import AddVaultModal from '../Components/AddVaultModal';
 import ViewVaultData from '../Components/ViewVaultData';
 import { useNavigation } from '@react-navigation/native';
 
-/**
- * @typedef {Object} VaultEntry
- * @property {Array<Object>} onlineAccounts
- * @property {Array<Object>} passwords
- * @property {Array<string|Array<string>>} cryptoSeeds
- */
 
-/**
- * Main Vault Screen Component
- * @returns {JSX.Element}
- */
 const VaultScreen = () => {
   const navigation = useNavigation();
 
-  // --- State Management ---
   const [modalVisible, setModalVisible] = useState(false);
-  /** @type {[VaultEntry, Function]} */
   const [vaultData, setVaultData] = useState({
     onlineAccounts: [],
     passwords: [],
@@ -57,11 +34,8 @@ const VaultScreen = () => {
   const [searchQuery, setSearchQuery] = useState(''); // For search/filter feature
   const [filteredVault, setFilteredVault] = useState(null); // For filtered results
 
-  // --- Effects ---
   useEffect(() => {
-    /**
-     * Loads vault data from AsyncStorage
-     */
+
     const loadVault = async () => {
       setLoading(true);
       try {
@@ -79,11 +53,6 @@ const VaultScreen = () => {
     loadVault();
   }, []);
 
-  // --- Helper: Save Vault ---
-  /**
-   * Save vault data to AsyncStorage
-   * @param {VaultEntry} data
-   */
   const saveVault = async (data) => {
     try {
       await AsyncStorage.setItem('vaultData', JSON.stringify(data));
@@ -93,12 +62,6 @@ const VaultScreen = () => {
     }
   };
 
-  // --- Add Entry Handler ---
-  /**
-   * Handles adding a new entry to the vault
-   * @param {string} type
-   * @param {Object} entry
-   */
   const handleAdd = useCallback((type, entry) => {
     const updated = {
       ...vaultData,
@@ -106,15 +69,9 @@ const VaultScreen = () => {
     };
     setVaultData(updated);
     saveVault(updated);
-    setModalVisible(false); // close modal after add
+    setModalVisible(false);
   }, [vaultData]);
 
-  // --- Delete Entry Handler ---
-  /**
-   * Handles deleting an entry from the vault
-   * @param {string} type
-   * @param {number} index
-   */
   const handleDelete = useCallback((type, index) => {
     Alert.alert('Delete', 'Are you sure?', [
       { text: 'Cancel' },
@@ -133,49 +90,24 @@ const VaultScreen = () => {
     ]);
   }, [vaultData]);
 
-  // --- Navigation Handlers ---
-  /**
-   * Navigates to Password Detail Screen
-   * @param {number} index
-   */
   const handlePasswordPress = useCallback((index) => {
     const item = vaultData.passwords[index];
     navigation.navigate('PasswordDetail', { passwordItem: item });
   }, [vaultData, navigation]);
 
-  /**
-   * Navigates to Online Account Detail Screen
-   * @param {number} index
-   */
   const handleOnlineAccountPress = useCallback((index) => {
     const item = vaultData.onlineAccounts[index];
     navigation.navigate('OnlineAccountDetail', { account: item });
   }, [vaultData, navigation]);
 
-  /**
-   * Navigates to Crypto Seed Detail Screen
-   * @param {number} index
-   */
   const handleCryptoSeedPress = useCallback((index) => {
     const item = vaultData.cryptoSeeds[index];
     navigation.navigate('CryptoSeedDetail', { seed: item });
   }, [vaultData, navigation]);
-
-  // --- Search & Filtering (Placeholder) ---
-  /**
-   * Handles search/filtering of vault entries (future feature)
-   * @param {string} query
-   */
   const handleSearch = useCallback((query) => {
     setSearchQuery(query);
-    // Placeholder: Implement actual filtering logic
-    // setFilteredVault(...)
   }, []);
 
-  // --- Renderers ---
-  /**
-   * Renders the header section
-   */
   const renderHeader = () => (
     <View style={styles.header}>
       <Text style={styles.title}>Vault</Text>
@@ -189,9 +121,6 @@ const VaultScreen = () => {
     </View>
   );
 
-  /**
-   * Renders the search bar (future feature)
-   */
   const renderSearchBar = () => (
     <View style={styles.searchBarContainer}>
       <TextInput
@@ -199,14 +128,11 @@ const VaultScreen = () => {
         placeholder="Search vault... (coming soon)"
         value={searchQuery}
         onChangeText={handleSearch}
-        editable={false} // Not implemented yet
+        editable={false}
       />
     </View>
   );
 
-  /**
-   * Renders the vault data section
-   */
   const renderVaultData = () => (
     <View style={styles.vaultSection}>
       <ViewVaultData
@@ -219,18 +145,13 @@ const VaultScreen = () => {
     </View>
   );
 
-  /**
-   * Renders loading or error state
-   */
+
   const renderStatus = () => {
     if (loading) return <ActivityIndicator size="large" color="#2196F3" style={{ marginTop: 40 }} />;
     if (error) return <Text style={styles.errorText}>{error}</Text>;
     return null;
   };
 
-  /**
-   * Renders the add modal
-   */
   const renderAddModal = () => (
     <AddVaultModal
       visible={modalVisible}
@@ -239,7 +160,6 @@ const VaultScreen = () => {
     />
   );
 
-  // --- Main Render ---
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>

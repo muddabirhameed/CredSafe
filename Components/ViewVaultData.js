@@ -11,7 +11,6 @@ const ViewVaultData = ({ vaultData, onDelete, onPasswordPress, onOnlineAccountPr
       ) : (
         data.map((item, index) => {
           if (keyName === 'passwords') {
-            // item: { title, password }
             return (
               <TouchableOpacity
                 key={index}
@@ -25,7 +24,6 @@ const ViewVaultData = ({ vaultData, onDelete, onPasswordPress, onOnlineAccountPr
               </TouchableOpacity>
             );
           } else if (keyName === 'onlineAccounts') {
-            // item: { username, email, password }
             return (
               <TouchableOpacity
                 key={index}
@@ -43,7 +41,6 @@ const ViewVaultData = ({ vaultData, onDelete, onPasswordPress, onOnlineAccountPr
               </TouchableOpacity>
             );
           } else {
-            // cryptoSeeds: array or string
             return (
               <TouchableOpacity
                 key={index}

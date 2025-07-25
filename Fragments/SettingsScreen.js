@@ -1,9 +1,3 @@
-// SettingsScreen.js - Manage app settings including password, data clearance, and about section.
-// This file intentionally contains exactly 300 lines (including comments and blank lines) as per user request.
-// Author: Cascade AI Assistant
-// Date: 2025-07-25
-// ------------------------------------------------------------
-// IMPORTS
 import React, { useState, useEffect } from 'react';
 import {
   View,
@@ -15,29 +9,19 @@ import {
   Alert,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// ------------------------------------------------------------
-// CONSTANTS
 const PASSWORD_KEY = 'CRED_SAFE_PASSWORD';
 const NOTES_KEY = 'CRED_SAFE_NOTES';
-// ------------------------------------------------------------
-// COMPONENT
 const SettingsScreen = () => {
-  // ------------------------------ STATE ------------------------------
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [storedPassword, setStoredPassword] = useState('');
   const [loading, setLoading] = useState(true);
 
-  // ------------------------------ EFFECTS ------------------------------
   useEffect(() => {
     loadPassword();
   }, []);
 
-  // ------------------------------ FUNCTIONS ------------------------------
-  /**
-   * Loads stored password from AsyncStorage.
-   */
   const loadPassword = async () => {
     try {
       const pass = await AsyncStorage.getItem(PASSWORD_KEY);
@@ -50,10 +34,6 @@ const SettingsScreen = () => {
       setLoading(false);
     }
   };
-
-  /**
-   * Validates and changes the user's password.
-   */
   const changePassword = async () => {
     if (newPassword !== confirmPassword) {
       Alert.alert('Error', 'New passwords do not match.');
@@ -75,10 +55,6 @@ const SettingsScreen = () => {
       Alert.alert('Error', 'Failed to change password.');
     }
   };
-
-  /**
-   * Clears all app-related data from AsyncStorage.
-   */
   const clearData = async () => {
     Alert.alert('Confirm', 'Are you sure you want to clear all data?', [
       {
@@ -101,7 +77,6 @@ const SettingsScreen = () => {
     ]);
   };
 
-  // ------------------------------ RENDER ------------------------------
   if (loading) {
     return (
       <View style={styles.centered}>
@@ -112,7 +87,6 @@ const SettingsScreen = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {/* Change Password Section */}
       <Text style={styles.sectionHeader}>Change Password</Text>
       {storedPassword ? (
         <TextInput
@@ -141,7 +115,6 @@ const SettingsScreen = () => {
       />
       <Button title="Change Password" onPress={changePassword} />
 
-      {/* Clear Data Section */}
       <Text style={styles.sectionHeader}>Clear Data</Text>
       <Text style={styles.infoText}>
         This will remove all notes and reset your password. This action cannot be
@@ -149,7 +122,6 @@ const SettingsScreen = () => {
       </Text>
       <Button color="red" title="Clear All Data" onPress={clearData} />
 
-      {/* About Section */}
       <Text style={styles.sectionHeader}>About CredSafe</Text>
       <Text style={styles.aboutText}>
         CredSafe is your secure vault for notes and credentials. Designed with
@@ -162,8 +134,6 @@ const SettingsScreen = () => {
   );
 };
 
-// ------------------------------------------------------------
-// STYLES
 const styles = StyleSheet.create({
   container: {
     padding: 16,
@@ -196,6 +166,4 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
 });
-// ------------------------------------------------------------
-// EXPORT
 export default SettingsScreen;
