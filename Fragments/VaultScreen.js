@@ -28,7 +28,6 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AddVaultModal from '../Components/AddVaultModal';
 import ViewVaultData from '../Components/ViewVaultData';
-import PasswordDetailScreen from '../Components/PasswordDetailScreen';
 import { useNavigation } from '@react-navigation/native';
 
 /**

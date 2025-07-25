@@ -8,7 +8,9 @@ import SplashScreen from './Components/SplashScreen';
 import SetupAccount from './Components/SetupAccount';
 import LoginScreen from './Components/LoginScreen';
 import HomeScreen from './Components/HomeScreen'; // create a simple one for now
-
+import OnlineAccountDetailScreen from './Components/OnlineAccountDetailScreen';
+import PasswordDetailScreen from './Components/PasswordDetailScreen';
+import CryptoSeedDetailScreen from './Components/CryptoSeedDetailScreen';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -20,6 +22,9 @@ const App = () => {
           <Stack.Screen name="SetupAccount" component={SetupAccount} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="OnlineAccountDetail" component={OnlineAccountDetailScreen} />
+          <Stack.Screen name="PasswordDetail" component={PasswordDetailScreen} />
+          <Stack.Screen name="CryptoSeedDetail" component={CryptoSeedDetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>
